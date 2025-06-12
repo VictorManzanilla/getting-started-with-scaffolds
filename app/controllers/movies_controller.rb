@@ -36,6 +36,11 @@ class MoviesController < ApplicationController
     end
   end
 
+  def edit
+    @the_movie = Movie.where(id: params.fetch(:id))[0]
+
+    render template: "movies/edit"
+  end
   def update
     the_id = params.fetch("id")
     the_movie = Movie.where({ :id => the_id })[0]
