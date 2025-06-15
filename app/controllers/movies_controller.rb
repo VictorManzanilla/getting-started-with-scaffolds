@@ -1,8 +1,6 @@
 class MoviesController < ApplicationController
 
-  def new
-    render template: "movies/new"
-  end
+ 
   
   def index
     matching_movies = Movie.all
@@ -21,7 +19,10 @@ class MoviesController < ApplicationController
 
     render({ :template => "movies/show" })
   end
-
+ def new
+  @the_movie = Movie.new
+    render template: "movies/new"
+  end
   def create
     @the_movie = Movie.new
    @the_movie.title = params.fetch("query_title")
@@ -32,7 +33,7 @@ class MoviesController < ApplicationController
       @the_movie.save
       redirect_to("/movies", { :notice => "Movie was successfully created." })
     else
-      render template: "movies/with_errors"
+      render template: "movies/new"
     end
   end
 
